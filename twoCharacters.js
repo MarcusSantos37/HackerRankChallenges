@@ -22,15 +22,38 @@ function readLine() {
   return inputString[currentLine++];
 }
 
-/*
- * Complete the 'alternate' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts STRING s as parameter.
- */
-
 function alternate(s) {
-  // Write your code here
+  if (s.length === 1) {
+    return 0;
+  }
+
+  let uniqueChar = [...new Set(Array.from(s))];
+
+  let sArr = Array.from(s);
+
+  let longest = 0;
+
+  for (var i = 0; i < uniqueChar.length; i++) {
+    let firstEl = uniqueChar[i];
+
+    for (var j = 0; j < uniqueChar.length; j++) {
+      let secondEl = uniqueChar[j];
+
+      let temp = sArr
+        .filter((filteredEl) => {
+          return filteredEl === firstEl || filteredEl === secondEl;
+        })
+        .join("");
+
+      if (
+        temp.indexOf(firstEl + firstEl) === -1 &&
+        temp.indexOf(secondEl + secondEl) === -1
+      ) {
+        longest = Math.max(longest, temp.length);
+      }
+    }
+  }
+  return longest;
 }
 
 function main() {
